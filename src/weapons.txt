@@ -1,0 +1,4 @@
+0,Blade,1,8
+1,Rod,1,4
+2,Flail,1,6
+3,Knife,1,6
