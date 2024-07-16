@@ -1,11 +1,5 @@
 use std::io::{self, Write};
 
-pub mod character_creation;
-pub mod character;
-pub mod identity;
-pub mod position;
-pub mod inventory;
-
 fn main() {
     // let character = CharacterCreation::create_character();
 
