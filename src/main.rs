@@ -1,7 +1,11 @@
+mod character_creation;
+
 use std::io::{self, Write};
+use crate::character_creation::CharacterCreation;
 
 fn main() {
-    // let character = CharacterCreation::create_character();
+    println!("=== CHARACTER CREATION ===");
+    let character = CharacterCreation::create_character();
 
     let mut input = String::new();
 
