@@ -1,27 +1,17 @@
-mod position;
-mod inventory;
-
 use std::io::{self, Write};
-use super::identity::Identity;
-use position::Position;
-use inventory::Inventory;
 
-pub struct Character {
-    identity: Identity,
-    position: Position,
-    inventory: Inventory,
+pub struct Identity {
+    pub name: String,
 }
 
-impl Character {
-    pub fn new() -> Character {
-        Character {
-            identity: Self::create_identity(),
-            position: Position::new(),
-            inventory: Inventory::new(),
+impl Identity {
+    pub fn new(name: String) -> Identity {
+        Identity {
+            name: name,
         }
     }
 
-    fn create_identity() -> Identity {
+    pub fn create() -> Identity {
         loop {
             print!("Input a name for your character: ");
             let _ = io::stdout().flush();
@@ -37,9 +27,5 @@ impl Character {
                 },
             }
         }
-    }
-
-    pub fn name(&self) -> &String {
-        &self.identity.name
     }
 }
