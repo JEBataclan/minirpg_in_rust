@@ -1,13 +1,13 @@
-mod player;
-mod item;
+mod monster;
 
 use std::io::{self, Write};
+use rand::Rng;
 
 enum Choice {
-    Move = 1,
-    Rest = 2,
-    ViewStat = 3,
-    Quit = 4,
+    Move,
+    Rest,
+    ViewStat,
+    Quit,
 }
 
 impl Choice {
@@ -33,13 +33,36 @@ pub fn start() {
         // Do stuff based on choice
         match Choice::from_u32(choice) {
             None => println!("Invalid choice."),
-            Some(Choice::Move) => {},
-            Some(Choice::Rest) => {},
+            Some(Choice::Move) => move_player(),
+            Some(Choice::Rest) => rest(),
             Some(Choice::ViewStat) => {},
             Some(Choice::Quit) => break,
         }
 
         input.clear();
+    }
+}
+
+fn move_player() {
+    let _monster = match monster::check_random_encounter() {
+        Some(monster) => println!("Encountered {}", monster.name()),
+        None => (),
+    };
+}
+
+fn rest() {
+    let num = rand::thread_rng().gen_range(0..=100);
+    
+    if num >= 0 && num <= 25 {
+        // Battle
+        let _monster = match monster::check_random_encounter() {
+            None => (),
+            Some(monster) => {
+                println!("Encountered {}", monster.name())
+            },
+        };
+    } else {
+        // Rest
     }
 }
 
