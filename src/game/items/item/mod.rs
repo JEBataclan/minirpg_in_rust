@@ -1,3 +1,4 @@
+use std::{error::Error, str::Split};
 use rand::Rng;
 
 struct ItemIdentity {
@@ -16,7 +17,7 @@ impl Range {
     }
 }
 
-struct Weapon {
+pub struct Weapon {
     identity: ItemIdentity,
     range: Range,
 }
@@ -33,6 +34,18 @@ impl Weapon {
                 max: max_damage,
             }
         }
+    }
+
+    pub fn from_split_string(mut string: Split<&str>) -> Result<(), Box<dyn Error>> {
+        // Parse ID
+
+        // Parse Name
+
+        // Parse Mininimum Damage
+
+        // Parse Maximum Damage
+        
+        Ok(())
     }
 }
 
