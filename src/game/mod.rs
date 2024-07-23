@@ -27,6 +27,7 @@ impl Choice {
 pub fn start() {
     let mut items: Items = Items::new();
     items.load_weapons();
+    items.display_weapons();
 
 
     // let mut input = String::new();

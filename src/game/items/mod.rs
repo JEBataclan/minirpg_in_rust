@@ -35,14 +35,20 @@ impl Items {
         }
 
         for (i, line) in content.lines().enumerate() {
-            println!("Parsine line {}: {}", i, line);
+            // println!("Parsine line {}: {}", i, line);
 
             let split = line.split(",");
 
             match Weapon::from_split_string(split) {
-                Ok(_) => todo!(), // Add to weapons: Vec<Weapon>
-                Err(_) => todo!(), // Print Error
+                Ok(weapon) => self.weapons.push(weapon),
+                Err(err) => println!("Failed to parse line to a struct Weapon. Line = {}, Error = {}", line, err),
             }
+        }
+    }
+
+    pub fn display_weapons(&mut self) {
+        for weapon in &self.weapons {
+            println!("{}", weapon);
         }
     }
 }
