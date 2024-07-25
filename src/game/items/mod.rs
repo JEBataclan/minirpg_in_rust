@@ -41,14 +41,14 @@ impl Items {
 
             match Weapon::from_split_string(split) {
                 Ok(weapon) => self.weapons.push(weapon),
-                Err(err) => println!("Failed to parse line to a struct Weapon. Line = {}, Error = {}", line, err),
+                Err(err) => println!("Failed to parse line to a struct Weapon. Line = \"{}\", Error = \"{}\"", line, err),
             }
         }
     }
 
     pub fn display_weapons(&mut self) {
         for weapon in &self.weapons {
-            println!("{}", weapon);
+            println!("{:?}", weapon);
         }
     }
 }

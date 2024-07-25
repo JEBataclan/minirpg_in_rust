@@ -1,11 +1,13 @@
-use std::{error::Error, fmt::{self, Display}, str::Split};
+use std::{error::Error, str::Split};
 use rand::Rng;
 
+#[derive(Debug)]
 struct ItemIdentity {
     id: u32,
     name: String,
 }
 
+#[derive(Debug)]
 struct Range {
     min: i32,
     max: i32,
@@ -17,14 +19,7 @@ impl Range {
     }
 }
 
-struct WeaponDeserializeError(String);
-
-impl fmt::Display for WeaponDeserializeError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "There is an error: {}", self.0)
-    }
-}
-
+#[derive(Debug)]
 pub struct Weapon {
     identity: ItemIdentity,
     range: Range,
@@ -55,13 +50,13 @@ impl Weapon {
 
                 id
             },
-            None => todo!(),
+            None => return Err("Failed to parse ID.")?,
         };
 
         // Parse Name
         let name: String = match string.next() {
             Some(string) => string.to_string(),
-            None => todo!(),
+            None => return Err("Failed to parse Name.")?,
         };
 
         // Parse Mininimum Damage
@@ -69,12 +64,12 @@ impl Weapon {
             Some(string) => {
                 let id: i32 = match string.trim().parse() {
                     Ok(num) => num,
-                    Err(_) => return Err("Failed to parse ID.")?,
+                    Err(_) => return Err("Failed to parse Minimum Damage.")?,
                 };
 
                 id
             },
-            None => todo!(),
+            None => return Err("Failed to parse Minimum Damage.")?,
         };
 
         // Parse Maximum Damage
@@ -82,22 +77,15 @@ impl Weapon {
             Some(string) => {
                 let id: i32 = match string.trim().parse() {
                     Ok(num) => num,
-                    Err(_) => return Err("Failed to parse ID.")?,
+                    Err(_) => return Err("Failed to parse Maximum Damage.")?,
                 };
 
                 id
             },
-            None => todo!(),
+            None => return Err("Failed to parse Maximum Damage.")?,
         };
         
         Ok(Weapon::new(id, name, min_damage, max_damage))
-    }
-}
-
-impl Display for Weapon {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        println!("id: {}, name: {}, min_damage: {}, max_damage: {}", self.identity.id, self.identity.name, self.range.min, self.range.max);
-        Ok(())
     }
 }
 
