@@ -1,0 +1,4 @@
+0,Ordinary Amor,4
+1,Robe,1
+2,Scapulare,1,3
+3,Cotton Shirt,2

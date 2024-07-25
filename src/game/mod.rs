@@ -29,6 +29,9 @@ pub fn start() {
     items.load_weapons();
     items.display_weapons();
 
+    items.load_armors();
+    items.display_armors();
+
 
     // let mut input = String::new();
 
