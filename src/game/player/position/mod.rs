@@ -1,5 +1,6 @@
 pub mod direction;
 
+#[derive(Debug)]
 pub struct Position {
     x_pos: i32,
     y_pos: i32,

@@ -31,7 +31,10 @@ pub fn start() {
     items.load_weapons();
     items.load_armors();
 
-    let player: Player = Player::create();
+    let player: Player = Player::create(&items);
+    println!("Created player info:");
+    println!("{:?}", player);
+    return;
 
     let mut input = String::new();
 

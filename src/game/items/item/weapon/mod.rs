@@ -15,6 +15,12 @@ impl Range {
     }
 }
 
+impl Clone for Range {
+    fn clone(&self) -> Self {
+        Self { min: self.min.clone(), max: self.max.clone() }
+    }
+}
+
 #[derive(Debug)]
 pub struct Weapon {
     identity: ItemIdentity,
@@ -82,5 +88,15 @@ impl Weapon {
         };
         
         Ok(Weapon::new(id, name, min_damage, max_damage))
+    }
+
+    pub fn id(&self) -> u32 {
+        self.identity.id
+    }
+}
+
+impl Clone for Weapon {
+    fn clone(&self) -> Self {
+        Self { identity: self.identity.clone(), range: self.range.clone() }
     }
 }

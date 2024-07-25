@@ -54,4 +54,14 @@ impl Armor {
         
         Ok(Armor::new(id, name, value))
     }
+
+    pub fn id(&self) -> u32 {
+        self.identity.id
+    }
+}
+
+impl Clone for Armor  {
+    fn clone(&self) -> Self {
+        Self { identity: self.identity.clone(), value: self.value.clone() }
+    }
 }
