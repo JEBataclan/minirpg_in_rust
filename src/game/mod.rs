@@ -4,6 +4,7 @@ mod monster;
 
 use std::io::{self, Write};
 use items::Items;
+use player::Player;
 use rand::Rng;
 
 enum Choice {
@@ -29,6 +30,8 @@ pub fn start() {
     let mut items: Items = Items::new();
     items.load_weapons();
     items.load_armors();
+
+    let player: Player = Player::create();
 
     let mut input = String::new();
 
