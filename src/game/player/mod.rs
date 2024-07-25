@@ -1,15 +1,15 @@
 mod identity;
 pub mod position;
-mod inventory;
+// mod inventory;
 
 use identity::Identity;
 use position::{direction::Direction, Position};
-use inventory::Inventory;
+// use inventory::Inventory;
 
 pub struct Player {
     identity: Identity,
     position: Position,
-    inventory: Inventory,
+    // inventory: Inventory,
 }
 
 impl Player {
@@ -17,7 +17,7 @@ impl Player {
         Player {
             identity: Identity::create(),
             position: Position::new(),
-            inventory: Inventory::new(),
+            // inventory: Inventory::new(),
         }
     }
 
