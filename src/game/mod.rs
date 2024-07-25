@@ -1,5 +1,6 @@
 mod items;
-// mod monster;
+mod player;
+mod monster;
 
 use std::io::{self, Write};
 use items::Items;
@@ -29,49 +30,48 @@ pub fn start() {
     items.load_weapons();
     items.load_armors();
 
+    let mut input = String::new();
 
-    // let mut input = String::new();
+    loop {
+        println!("1) Move 2) Rest 3) View Stats 4) Quit");
 
-    // loop {
-    //     println!("1) Move 2) Rest 3) View Stats 4) Quit");
+        let choice: u32 = input_u32(&mut input);
 
-    //     let choice: u32 = input_u32(&mut input);
+        // Do stuff based on choice
+        match Choice::from_u32(choice) {
+            None => println!("Invalid choice."),
+            Some(Choice::Move) => move_player(),
+            Some(Choice::Rest) => rest(),
+            Some(Choice::ViewStat) => {},
+            Some(Choice::Quit) => break,
+        }
 
-    //     // Do stuff based on choice
-    //     match Choice::from_u32(choice) {
-    //         None => println!("Invalid choice."),
-    //         Some(Choice::Move) => move_player(),
-    //         Some(Choice::Rest) => rest(),
-    //         Some(Choice::ViewStat) => {},
-    //         Some(Choice::Quit) => break,
-    //     }
-
-    //     input.clear();
-    // }
+        input.clear();
+    }
 }
 
-// fn move_player() {
-//     let _monster = match monster::check_random_encounter() {
-//         Some(monster) => println!("Encountered {}", monster.name()),
-//         None => (),
-//     };
-// }
+fn move_player() {
+    let _monster = match monster::check_random_encounter() {
+        Some(monster) => println!("Encountered {}", monster.name()),
+        None => (),
+    };
+}
 
-// fn rest() {
-//     let num = rand::thread_rng().gen_range(0..=100);
+fn rest() {
+    let num = rand::thread_rng().gen_range(0..=100);
     
-//     if num >= 0 && num <= 25 {
-//         // Battle
-//         let _monster = match monster::check_random_encounter() {
-//             None => (),
-//             Some(monster) => {
-//                 println!("Encountered {}", monster.name())
-//             },
-//         };
-//     } else {
-//         // Rest
-//     }
-// }
+    if num >= 0 && num <= 25 {
+        // Battle
+        let _monster = match monster::check_random_encounter() {
+            None => (),
+            Some(monster) => {
+                println!("Encountered {}", monster.name())
+            },
+        };
+    } else {
+        // Rest
+    }
+}
 
 fn input_string(input: &mut String) {
     loop {
