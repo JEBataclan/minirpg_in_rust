@@ -1,10 +1,11 @@
 mod items;
 mod player;
 mod monster;
+mod battle;
 
 use std::io::{self, Write};
 use items::Items;
-use player::Player;
+use player::{position::direction::Direction, Player};
 use rand::Rng;
 
 enum Choice {
@@ -31,10 +32,7 @@ pub fn start() {
     items.load_weapons();
     items.load_armors();
 
-    let player: Player = Player::create(&items);
-    println!("Created player info:");
-    println!("{:?}", player);
-    return;
+    let mut player: Player = Player::create(&items);
 
     let mut input = String::new();
 
@@ -46,7 +44,7 @@ pub fn start() {
         // Do stuff based on choice
         match Choice::from_u32(choice) {
             None => println!("Invalid choice."),
-            Some(Choice::Move) => move_player(),
+            Some(Choice::Move) => move_player(&mut player),
             Some(Choice::Rest) => rest(),
             Some(Choice::ViewStat) => {},
             Some(Choice::Quit) => break,
@@ -56,10 +54,32 @@ pub fn start() {
     }
 }
 
-fn move_player() {
-    let _monster = match monster::check_random_encounter() {
-        Some(monster) => println!("Encountered {}", monster.name()),
-        None => (),
+fn move_player(player: &mut Player) {
+    let mut input: String = String::new();
+
+    loop {
+        println!("1) North 2) East 3) West 4) South 5) Cancel");
+
+        let choice: u32 = input_u32(&mut input);
+    
+        if choice == 5 {
+            return;
+        }
+    
+        match Direction::from_u32(choice) {
+            Some(direction) => {
+                player.move_position(direction);
+                break;
+            },
+            None => println!("Invalid direction."),
+        }
+    }
+
+   match monster::check_random_encounter() {
+        Some(mut monster) => {
+            battle::commence(player, &mut monster);
+        },
+        None => return,
     };
 }
 
