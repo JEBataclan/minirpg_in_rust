@@ -12,11 +12,11 @@ impl Direction {
         let mut input: String = String::new();
         
         loop {
+            // What if to retract moving our player? (thinking)
             println!("1) North 2) East 3) West 4) South");
 
             let direction: u32 = input_u32(&mut input);
     
-            // Do stuff based on choice
             match Self::from_u32(direction) {
                 Some(direction) => return direction,
                 None => println!("Invalid direction."),
