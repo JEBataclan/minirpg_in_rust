@@ -1,10 +1,10 @@
+pub mod utils;
 mod items;
 mod player;
 mod monster;
 mod action;
 mod battle;
 
-use std::io::{self, Write};
 use items::Items;
 use player::{position::direction::Direction, Player};
 use action::Action;
@@ -28,30 +28,12 @@ pub fn start() {
 }
 
 fn move_player(player: &mut Player) {
-    let mut input: String = String::new();
+    let direction: Direction = Direction::decide();
 
-    loop {
-        println!("1) North 2) East 3) West 4) South 5) Cancel");
+    player.move_position(direction);
 
-        let choice: u32 = input_u32(&mut input);
-    
-        if choice == 5 {
-            return;
-        }
-    
-        match Direction::from_u32(choice) {
-            Some(direction) => {
-                player.move_position(direction);
-                break;
-            },
-            None => println!("Invalid direction."),
-        }
-    }
-
-   match monster::check_random_encounter() {
-        Some(mut monster) => {
-            battle::commence(player, &mut monster);
-        },
+    match monster::check_random_encounter() {
+        Some(mut monster) => battle::commence(player, &mut monster),
         None => return,
     };
 }
@@ -69,42 +51,5 @@ fn rest() {
         };
     } else {
         // Rest
-    }
-}
-
-fn input_string(input: &mut String) {
-    loop {
-        print!(": "); 
-        let _ = io::stdout().flush();
-
-        // Validate line
-        match io::stdin().read_line(input) {
-            Ok(_) => break,
-            Err(err) => {
-                println!("Failed to read line with Error: {}", err);
-                input.clear();
-                continue;
-            },
-        }
-    }
-}
-
-fn input_u32(input: &mut String) -> u32 {
-    loop {
-        input_string(input);
-
-        // Validate input
-        let _choice: u32 = match input.trim().parse() {
-            Ok(num) => {
-                input.clear();
-                return num;
-            },
-            Err(err) => {
-                println!("Failed to parse input with Error: {}", err);
-                input.clear();
-                continue;
-            },
-        };
-        
     }
 }

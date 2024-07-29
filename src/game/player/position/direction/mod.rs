@@ -1,3 +1,5 @@
+use crate::game::utils::input_u32;
+
 pub enum Direction {
     North,
     South,
@@ -6,6 +8,24 @@ pub enum Direction {
 }
 
 impl Direction {
+    pub fn decide() -> Direction {
+        let mut input: String = String::new();
+        
+        loop {
+            println!("1) North 2) East 3) West 4) South");
+
+            let direction: u32 = input_u32(&mut input);
+    
+            // Do stuff based on choice
+            match Self::from_u32(direction) {
+                Some(direction) => return direction,
+                None => println!("Invalid direction."),
+            }
+    
+            input.clear();
+        }
+    }
+
     pub fn from_u32(value: u32) -> Option<Direction> {
         match value {
             1 => Some(Direction::North),

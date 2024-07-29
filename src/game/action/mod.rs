@@ -1,4 +1,4 @@
-use crate::game::input_u32;
+use crate::game::utils::input_u32;
 
 pub enum Action {
     Move,
