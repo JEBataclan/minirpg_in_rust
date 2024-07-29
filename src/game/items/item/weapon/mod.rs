@@ -3,7 +3,6 @@ use rand::Rng;
 
 use super::ItemIdentity;
 
-#[derive(Debug)]
 struct Range {
     min: i32,
     max: i32,
@@ -21,7 +20,6 @@ impl Clone for Range {
     }
 }
 
-#[derive(Debug)]
 pub struct Weapon {
     identity: ItemIdentity,
     range: Range,

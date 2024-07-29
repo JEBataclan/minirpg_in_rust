@@ -12,7 +12,6 @@ use super::items::item::armor::Armor;
 use super::items::Items;
 // use inventory::Inventory;
 
-#[derive(Debug)]
 pub struct Player {
     identity: Identity,
     position: Position,

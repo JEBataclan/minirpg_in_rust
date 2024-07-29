@@ -2,7 +2,6 @@ use std::{error::Error, str::Split};
 
 use super::ItemIdentity;
 
-#[derive(Debug)]
 pub struct Armor {
     identity: ItemIdentity,
     value: i32,

@@ -1,6 +1,5 @@
 use std::io::{self, Write};
 
-#[derive(Debug)]
 pub enum PlayerClass {
     Fighter,
     Wizard,

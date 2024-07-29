@@ -1,6 +1,5 @@
 use std::io::{self, Write};
 
-#[derive(Debug)]
 pub struct Identity {
     pub name: String,
 }
