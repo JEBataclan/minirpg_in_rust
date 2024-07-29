@@ -8,20 +8,20 @@ use items::Items;
 use player::{position::direction::Direction, Player};
 use rand::Rng;
 
-enum Choice {
+enum Action {
     Move,
     Rest,
     ViewStat,
     Quit,
 }
 
-impl Choice {
-    pub fn from_u32(value: u32) -> Option<Choice> {
+impl Action {
+    pub fn from_u32(value: u32) -> Option<Action> {
         match value {
-            1 => Some(Choice::Move),
-            2 => Some(Choice::Rest),
-            3 => Some(Choice::ViewStat),
-            4 => Some(Choice::Quit),
+            1 => Some(Action::Move),
+            2 => Some(Action::Rest),
+            3 => Some(Action::ViewStat),
+            4 => Some(Action::Quit),
             _ => None,
         }
     }
@@ -42,12 +42,12 @@ pub fn start() {
         let choice: u32 = input_u32(&mut input);
 
         // Do stuff based on choice
-        match Choice::from_u32(choice) {
+        match Action::from_u32(choice) {
             None => println!("Invalid choice."),
-            Some(Choice::Move) => move_player(&mut player),
-            Some(Choice::Rest) => rest(),
-            Some(Choice::ViewStat) => {},
-            Some(Choice::Quit) => break,
+            Some(Action::Move) => move_player(&mut player),
+            Some(Action::Rest) => rest(),
+            Some(Action::ViewStat) => {},
+            Some(Action::Quit) => break,
         }
 
         input.clear();
