@@ -1,31 +1,14 @@
 mod items;
 mod player;
 mod monster;
+mod action;
 mod battle;
 
 use std::io::{self, Write};
 use items::Items;
 use player::{position::direction::Direction, Player};
+use action::Action;
 use rand::Rng;
-
-enum Action {
-    Move,
-    Rest,
-    ViewStat,
-    Quit,
-}
-
-impl Action {
-    pub fn from_u32(value: u32) -> Option<Action> {
-        match value {
-            1 => Some(Action::Move),
-            2 => Some(Action::Rest),
-            3 => Some(Action::ViewStat),
-            4 => Some(Action::Quit),
-            _ => None,
-        }
-    }
-}
 
 pub fn start() {
     let mut items: Items = Items::new();
@@ -34,23 +17,13 @@ pub fn start() {
 
     let mut player: Player = Player::create(&items);
 
-    let mut input = String::new();
-
     loop {
-        println!("1) Move 2) Rest 3) View Stats 4) Quit");
-
-        let choice: u32 = input_u32(&mut input);
-
-        // Do stuff based on choice
-        match Action::from_u32(choice) {
-            None => println!("Invalid choice."),
-            Some(Action::Move) => move_player(&mut player),
-            Some(Action::Rest) => rest(),
-            Some(Action::ViewStat) => {},
-            Some(Action::Quit) => break,
+        match Action::decide() {
+            Action::Move => move_player(&mut player),
+            Action::Rest => rest(),
+            Action::ViewStat => {},
+            Action::Quit => break,
         }
-
-        input.clear();
     }
 }
 
