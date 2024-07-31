@@ -28,8 +28,10 @@ pub fn start() {
 }
 
 fn move_player(player: &mut Player) {
+    // TODO: Maybe just say player.move() then let the
+    // deciding happen internatlly instead of here?
+    // That sounds a lot better than deciding it here.
     let direction: Direction = Direction::decide();
-
     player.move_position(direction);
 
     match monster::check_random_encounter() {
