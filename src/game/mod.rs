@@ -1,12 +1,12 @@
 pub mod utils;
 mod items;
-mod player;
-mod monster;
+mod entity;
 mod action;
 mod battle;
 
 use items::Items;
-use player::{position::direction::Direction, Player};
+use entity::player::{position::direction::Direction, Player};
+use entity::monster;
 use action::Action;
 use rand::Rng;
 
