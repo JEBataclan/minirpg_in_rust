@@ -54,9 +54,9 @@ impl Items {
     }
 
     pub fn display_weapons(&mut self) {
-        for weapon in &self.weapons {
-            println!("{:?}", weapon);
-        }
+        // for weapon in &self.weapons {
+        //     println!("{:?}", weapon);
+        // }
     }
 
     pub fn load_armors(&mut self) {
@@ -95,9 +95,9 @@ impl Items {
     }
 
     pub fn display_armors(&mut self) {
-        for armor in &self.armors {
-            println!("{:?}", armor);
-        }
+        // for armor in &self.armors {
+        //     println!("{:?}", armor);
+        // }
     }
 
     pub fn get_weapon_with_id(&self, id: u32) -> Option<&Weapon> {
